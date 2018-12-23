@@ -5,8 +5,8 @@ import (
 )
 
 type temperatureTest struct {
-	i        float64
-	expected float64
+	i        Temperature
+	expected Temperature
 }
 
 var CtoFTests = []temperatureTest{

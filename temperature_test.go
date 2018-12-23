@@ -5,8 +5,8 @@ import (
 )
 
 type temperatureTest struct {
-	i        Temperature
-	expected Temperature
+	i    Temperature
+	want Temperature
 }
 
 var CtoFTests = []temperatureTest{
@@ -15,11 +15,26 @@ var CtoFTests = []temperatureTest{
 	{-10, 14},
 }
 
-func testCtoF(t *testing.T) {
+func TestCtoF(t *testing.T) {
 	for _, tt := range CtoFTests {
-		actual := CtoF(tt.i)
-		if actual != tt.expected {
-			t.Errorf("expected %v, actual %v", tt.expected, actual)
+		got := CtoF(tt.i)
+		if got != tt.want {
+			t.Errorf("expected %v, got %v", tt.want, got)
+		}
+	}
+}
+
+var FtoCTests = []temperatureTest{
+	{32, 0},
+	{86, 30},
+	{140, 60},
+}
+
+func TestFtoC(t *testing.T) {
+	for _, tt := range FtoCTests {
+		got := FtoC(tt.i)
+		if got != tt.want {
+			t.Errorf("expected %v, got %v", tt.want, got)
 		}
 	}
 }

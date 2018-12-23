@@ -5,7 +5,7 @@ type Temperature float64
 
 // CtoF converts temperature from Celsius to Fahrenheit
 func CtoF(c Temperature) Temperature {
-	return (c * (9 / 5)) + 32
+	return (c * 9 / 5) + 32
 }
 
 // FtoC converts temperature from Fahrenheit to Celsius

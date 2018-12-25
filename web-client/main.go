@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/http/httputil"
+	"os"
 	"strings"
 	"time"
 )
@@ -43,7 +45,7 @@ func postExample() {
 }
 
 func customClientExample() {
-	//	debug := os.Getenv("DEBUG")
+	debug := os.Getenv("DEBUG")
 	client := &http.Client{
 		Timeout: 1000 * time.Millisecond,
 	}
@@ -53,25 +55,25 @@ func customClientExample() {
 		log.Fatal(err)
 	}
 
-	// if debug == "1" {
-	// 	debugRequest, err := httputil.DumpRequestOut(request, true)
-	// 	if err != nil {
-	// 		log.Fatal(err)
-	// 	}
+	if debug == "1" {
+		debugRequest, err := httputil.DumpRequestOut(request, true)
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	// 	fmt.Printf("%s", debugRequest)
-	// }
+		fmt.Printf("%s", debugRequest)
+	}
 
 	response, err := client.Do(request)
 
-	// if debug == "1" {
-	// 	debugResponse, err := httputil.DumpResponse(response, true)
-	// 	if err != nil {
-	// 		log.Fatal(err)
-	// 	}
+	if debug == "1" {
+		debugResponse, err := httputil.DumpResponse(response, true)
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	// 	fmt.Printf("%s", debugResponse)
-	// }
+		fmt.Printf("%s", debugResponse)
+	}
 
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {

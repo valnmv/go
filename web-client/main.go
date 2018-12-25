@@ -48,6 +48,7 @@ func customClientExample() {
 	fmt.Println("DEBUG=", debug)
 	client := &http.Client{}
 	request, err := http.NewRequest("GET", "https://ifconfig.co", nil)
+	request.Header.Add("Accept", "application/json")
 	if err != nil {
 		log.Fatal(err)
 	}

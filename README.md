@@ -17,8 +17,9 @@ GUI, <https://www.reddit.com/r/golang/comments/6dcu48/golang_gui_framework/>
 ## Notes
 
 ### Client geolocaton service
-ifconfig.co, https://github.com/mpolden/echoip
+
+ifconfig.co, <https://github.com/mpolden/echoip>
 
 ### HTTP testing service
 
-https://httpbin.org/post
+<https://httpbin.org/post>

@@ -5,6 +5,8 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/http/httputil"
+	"os"
 	"strings"
 )
 
@@ -42,19 +44,40 @@ func postExample() {
 }
 
 func customClientExample() {
+	debug := os.Getenv("DEBUG")
+	fmt.Println("DEBUG=", debug)
 	client := &http.Client{}
 	request, err := http.NewRequest("GET", "https://ifconfig.co", nil)
 	if err != nil {
 		log.Fatal(err)
 	}
 
+	if debug == "1" {
+		debugRequest, err := httputil.DumpRequestOut(request, true)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Printf("%s", debugRequest)
+	}
+
 	response, err := client.Do(request)
+
+	if debug == "1" {
+		debugResponse, err := httputil.DumpResponse(response, true)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		fmt.Printf("%s", debugResponse)
+	}
+
+	defer response.Body.Close()
 	body, err := ioutil.ReadAll(response.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	defer response.Body.Close()
 	fmt.Printf("%s", body)
 }
 

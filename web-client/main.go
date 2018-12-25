@@ -41,7 +41,25 @@ func postExample() {
 	fmt.Printf("%s", body)
 }
 
+func customClientExample() {
+	client := &http.Client{}
+	request, err := http.NewRequest("GET", "https://ifconfig.co", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	response, err := client.Do(request)
+	body, err := ioutil.ReadAll(response.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	defer response.Body.Close()
+	fmt.Printf("%s", body)
+}
+
 func main() {
 	getExample()
 	postExample()
+	customClientExample()
 }

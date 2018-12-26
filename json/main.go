@@ -13,7 +13,7 @@ type User struct {
 	Blog string `json:"blog"`
 }
 
-func encodeJSON() {
+func marshalJSON() {
 	type Person struct {
 		Name    string   `json:"name,omitempty"`
 		Age     int      `json:"age,omitempty"`
@@ -33,7 +33,11 @@ func encodeJSON() {
 		log.Fatal(err)
 	}
 	jsonStringData := string(jsonByteData)
-	fmt.Println(jsonStringData)
+	fmt.Println("Marshal: ", jsonStringData)
+
+	x := Person{}
+	json.Unmarshal([]byte(jsonStringData), &x)
+	fmt.Printf("Unmarshal: %+v\n", x)
 }
 
 func decodeJSON() {
@@ -52,6 +56,6 @@ func decodeJSON() {
 }
 
 func main() {
-	encodeJSON()
+	marshalJSON()
 	decodeJSON()
 }

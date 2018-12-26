@@ -8,19 +8,43 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
-// Index route handler
-func Index(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	fmt.Fprint(w, "Welcome!\n")
+type Server struct {
+	r *httprouter.Router
 }
 
-// Hello route handler
-func Hello(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	fmt.Fprintf(w, "hello, %s\n", ps.ByName("name"))
+func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=utf-8")
+	s.r.ServeHTTP(w, r)
+}
+
+func ListTasks(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	fmt.Fprint(w, "ListTasks\n")
+}
+
+func CreateTask(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	fmt.Fprint(w, "CreateTasks\n")
+}
+
+func ReadTask(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	fmt.Fprint(w, "ReadTask\n")
+}
+
+func UpdateTask(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	fmt.Fprint(w, "UpdateTask\n")
+}
+
+func DeleteTask(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	fmt.Fprint(w, "DeleteTask\n")
 }
 
 func main() {
 	router := httprouter.New()
-	router.GET("/", Index)
-	router.GET("/hello/:name", Hello)
-	log.Fatal(http.ListenAndServe(":8080", router))
+	router.GET("/", ListTasks)
+	router.POST("/", CreateTask)
+	router.GET("/:id", ReadTask)
+	router.PUT("/:id", UpdateTask)
+	router.DELETE("/:id", DeleteTask)
+
+	log.Fatal(http.ListenAndServe(":8080", &Server{router}))
+
 }

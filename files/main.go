@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+
+	"github.com/BurntSushi/toml"
 )
 
 func readFile() {
@@ -34,8 +36,21 @@ func readDir() {
 	}
 }
 
+func useTOML() {
+	type Config struct {
+		Name   string
+		Awake  bool
+		Hungry bool
+	}
+
+	cfg := Config{}
+	toml.DecodeFile("config.toml", &cfg)
+	fmt.Printf("%+v", cfg)
+}
+
 func main() {
 	readFile()
 	writeFile()
 	readDir()
+	useTOML()
 }

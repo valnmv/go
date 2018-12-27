@@ -8,6 +8,7 @@ import (
 	"github.com/julienschmidt/httprouter"
 )
 
+// Server is wrapper structure for httprouter
 type Server struct {
 	r *httprouter.Router
 }
@@ -17,22 +18,27 @@ func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	s.r.ServeHTTP(w, r)
 }
 
+// ListTasks serves GET requests
 func ListTasks(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprint(w, "ListTasks\n")
 }
 
+// CreateTask serves POST requests
 func CreateTask(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprint(w, "CreateTasks\n")
 }
 
+// ReadTask serves GET/:id requests
 func ReadTask(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprint(w, "ReadTask\n")
 }
 
+// UpdateTask serves PUT/:id requests
 func UpdateTask(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprint(w, "UpdateTask\n")
 }
 
+// DeleteTask serves DELETE/:id requests
 func DeleteTask(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	fmt.Fprint(w, "DeleteTask\n")
 }

@@ -52,5 +52,4 @@ func main() {
 	router.DELETE("/:id", DeleteTask)
 
 	log.Fatal(http.ListenAndServe(":8080", &Server{router}))
-
 }

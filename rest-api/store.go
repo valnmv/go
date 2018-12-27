@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/binary"
 	"encoding/json"
 
 	"github.com/boltdb/bolt"
@@ -12,7 +13,7 @@ type Task struct {
 	Title string `json:"title"`
 }
 
-// Store is datastore around BoltDB
+// Store is datastore interface around BoltDB
 type Store struct {
 	db *bolt.DB
 }
@@ -63,4 +64,32 @@ func (s *Store) GetTasks() ([]*Task, error) {
 	}
 
 	return tasks, nil
+}
+
+// CreateTask persists a task
+func (s *Store) CreateTask(t *Task) error {
+	return s.db.Update(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte("tasks"))
+
+		id, _ := b.NextSequence()
+		t.ID = int(id)
+		buf, err := json.Marshal(t)
+		if err != nil {
+			return err
+		}
+
+		return b.Put(itob(t.ID), buf)
+	})
+}
+
+// Close closes the database
+func (s *Store) Close() error {
+	return s.db.Close()
+}
+
+// itob returns an 8-byte big endian representation of v.
+func itob(v int) []byte {
+	b := make([]byte, 8)
+	binary.BigEndian.PutUint64(b, uint64(v))
+	return b
 }

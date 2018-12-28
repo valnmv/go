@@ -7,8 +7,9 @@ Book examples, <https://github.com/shapeshed/golang-book-examples/>
 
 ## Web app with Go, Gin and React
 
-[See here](./golang-gin) based on 
-[Building a Web App With Go, Gin and React](https://hakaselogs.me/2018-04-20/building-a-web-app-with-go-gin-and-react/)
+[See here](./golang-gin)
+
+Based on [Building a Web App With Go, Gin and React](https://hakaselogs.me/2018-04-20/building-a-web-app-with-go-gin-and-react/)
 
 https://github.com/gin-gonic/gin
 

@@ -1,12 +1,20 @@
-# Learning GoLang
+# Learning Golang
 
+## Golang basics
 [Go in 24 Hours, Sams Teach Yourself : Next Generation Systems Programming with Golang](https://www.amazon.com/Hours-Sams-Teach-Yourself-Programming/dp/0672338033)
 
 Book examples, <https://github.com/shapeshed/golang-book-examples/>
 
-## Reference
+## Web app with Go, Gin and React
 
-[Project site](https://golang.org/)
+[See here](./golang-gin) based on 
+[Building a Web App With Go, Gin and React](https://hakaselogs.me/2018-04-20/building-a-web-app-with-go-gin-and-react/)
+
+https://github.com/gin-gonic/gin
+
+## Useful links
+
+[Golang project site](https://golang.org/)
 
 [Effective Go](https://golang.org/doc/effective_go.html)
 
@@ -14,12 +22,10 @@ Book examples, <https://github.com/shapeshed/golang-book-examples/>
 
 GUI, <https://www.reddit.com/r/golang/comments/6dcu48/golang_gui_framework/>
 
-## Notes
+## Other
 
-### Client geolocaton service
+Client geolocaton service, 
+[ifconfig.co](https://github.com/mpolden/echoip)
 
-ifconfig.co, <https://github.com/mpolden/echoip>
-
-### HTTP testing service
-
+HTTP testing service, 
 <https://httpbin.org/post>
